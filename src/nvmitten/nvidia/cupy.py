@@ -126,10 +126,12 @@ CUDARTWrapper = _ModuleWrapper(cudart,
                                cudart.cudaError_t,
                                cudart.cudaGetErrorString)
 
-NVRTCWrapper = _ModuleWrapper(nvrtc,
-                              nvrtc.nvrtcResult,
-                              nvrtc.nvrtcGetErrorString)
-
+try:
+    NVRTCWrapper = _ModuleWrapper(nvrtc,
+                                  nvrtc.nvrtcResult,
+                                  nvrtc.nvrtcGetErrorString)
+except:
+    NVRTCWrapper = None
 
 class CuPyContextManager:
     """Makes CUDA contexts more Pythonic, allowing them to be used as scoped contexts.
